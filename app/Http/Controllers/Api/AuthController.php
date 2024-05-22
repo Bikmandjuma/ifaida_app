@@ -15,6 +15,63 @@ class AuthController extends Controller
         $this->user = $user;
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/register",
+     *     operationId="registerUser",
+     *     tags={"Register"},
+     *     summary="Register a new user",
+     *     description="User Registration Endpoint",
+     *     @OA\Parameter(
+     *          name="name",
+     *          description="Enter name",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *     ),
+     *     @OA\Parameter(
+     *          name="email",
+     *          description="Enter email",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *     ),
+     *     @OA\Parameter(
+     *          name="password",
+     *          description="Password",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="User Registered Successfully",
+     *         @OA\JsonContent()
+     *     ),
+     *     @OA\Response(
+     *       response=200,
+     *       description="Registered Successfully",
+     *       @OA\JsonContent()
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Unprocessable Entity",
+     *         @OA\JsonContent()
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad Request",
+     *         @OA\JsonContent()
+     *     ),
+     * )
+     */
+
     public function register(Request $request)
     {
         // validate the incoming request
@@ -56,6 +113,55 @@ class AuthController extends Controller
         ]);
     }
 
+    //Login api
+    /**
+        * @OA\Post(
+        *     path="/api/login",
+        *     operationId="loginUser",
+        *     tags={"Login"},
+        *     summary="Login a user",
+        *     description="User Login Endpoint",
+        *     @OA\Parameter(
+        *          name="email",
+        *          description="Enter email",
+        *          required=true,
+        *          in="query",
+        *          @OA\Schema(
+        *              type="string"
+        *          )
+        *     ),
+        *     @OA\Parameter(
+        *          name="password",
+        *          description="Enter password",
+        *          required=true,
+        *          in="query",
+        *          @OA\Schema(
+        *              type="string"
+        *          )
+        *     ),
+        *     @OA\Response(
+        *         response="201",
+        *         description="User Login Successfully",
+        *         @OA\JsonContent()
+        *     ),
+        *     @OA\Response(
+        *       response="200",
+        *       description="Login Successfull",
+        *       @OA\JsonContent()
+        *     ),
+        *     @OA\Response(
+        *         response="422",
+        *         description="Unprocessable Entity",
+        *         @OA\JsonContent()
+        *     ),
+        *     @OA\Response(
+        *         response="400",
+        *         description="Bad Request",
+        *         @OA\JsonContent()
+        *     ),
+        * )
+        */
+
     public function login(Request $request)
     {
         $this->validate($request, [
@@ -88,7 +194,7 @@ class AuthController extends Controller
                     ],
                 ],
             ]);
-            
+
         }else{
             return response()->json([
                 'status'=>'failed',
