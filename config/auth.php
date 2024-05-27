@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'api',
+        'guard' => 'web',
         'passwords' => 'users',
     ],
 
@@ -35,23 +35,21 @@ return [
     |
     */
 
-    // 'guards' => [
-    //     'web' => [
-    //         'driver' => 'session',
-    //         'provider' => 'users',
-    //     ],
-    // ],
-
     'guards' => [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
 
-        'api' => [
-            'driver' => 'jwt',
-            'provider' => 'users',
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
         ],
+
+        'sheikh' => [
+            'driver' => 'session',
+            'provider' => 'sheikhs',
+        ]
     ],
 
     /*
@@ -81,6 +79,16 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
+
+        'sheikhs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Sheikh::class,
+        ]
     ],
 
     /*
